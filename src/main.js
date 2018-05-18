@@ -3,21 +3,26 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import { Main, Tag, Input, Button, Icon } from 'element-ui'
+import { Row, Col, Main, Header, Tag, Input, Button, Icon } from 'element-ui'
+import lodash from 'lodash'
 import App from './App'
+import 'element-ui/lib/theme-chalk/display.css'
 
 Vue.config.productionTip = false
 
-Vue.component(Main.name, Main)
-Vue.component(Tag.name, Tag)
-Vue.component(Input.name, Input)
-Vue.component(Button.name, Button)
-Vue.component(Icon.name, Icon)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Main)
+Vue.use(Header)
+Vue.use(Tag)
+Vue.use(Input)
+Vue.use(Button)
+Vue.use(Icon)
 Vue.use(VueAxios, axios)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   template: '<App/>',
-  components: { App }
+  components: { App}
 })
