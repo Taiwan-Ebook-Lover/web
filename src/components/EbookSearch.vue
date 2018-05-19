@@ -4,10 +4,10 @@
       nav
         h1 台灣電子書搜尋
     el-main
-      
+
       el-input.input-with-select(
         v-model='searchKeyWord'
-        placeholder='搜尋您想比價的電子書名關鍵字' 
+        placeholder='搜尋您想比價的電子書名關鍵字'
         @keyup.enter.native='submitSearch'
       )
         el-button(@click='submitSearch' slot='append' icon='el-icon-search')
@@ -31,7 +31,7 @@
             .boot-title
               a(:href='book.link', target='_blank') {{ book.title }}
             p.hidden-xs-only {{ book.about.substr(0, 200) + '...' }}
-            
+
             span.price.hidden-xs-only {{ book.price }} {{ book.priceCurrency }}
           el-col.mobile-price.hidden-sm-and-up(:xs='24')
             span {{ book.price }} {{ book.priceCurrency }}
@@ -102,11 +102,11 @@
   main {
     padding: 1.2rem 1rem;
   }
-  
+
   nav {
     background-color: $main_color;
     color: #eee;
-    
+
     h1 {
       margin: 0;
       padding: 1rem;
@@ -135,6 +135,13 @@
     margin-bottom: 15px;
     -webkit-box-shadow: 0 0 1px 0 rgba(0,0,0,.2), 0 1px 10px 0 rgba(0,0,0,.19);
     box-shadow: 0 0 1px 0 rgba(0,0,0,.2), 0 1px 10px 0 rgba(0,0,0,.19);
+    transition: transform 300ms ease;
+
+    &:hover,
+    &:focus {
+      box-shadow: 2px 2px 12px 0px rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.19);
+      transform: translateY(-2px);
+    }
 
     .company-name {
       margin-top: .5rem;
@@ -149,7 +156,7 @@
         padding-right: .3rem;
       }
     }
-    
+
     .image {
       img {
         width: 180px;
