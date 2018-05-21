@@ -1,30 +1,29 @@
 <template lang='pug'>
   div
-    el-header
+    el-header(style='height: 120px')
       nav
         h1 台灣電子書搜尋
+        el-input(
+          placeholder='搜尋您想比價的電子書名關鍵字或ISBN'
+          prefix-icon='el-icon-search'
+          v-model='searchKeyWord'
+          @keyup.enter.native='submitSearch'
+        )
+
     el-main
-      
-      el-input.input-with-select(
-        v-model='searchKeyWord'
-        placeholder='搜尋您想比價的電子書名關鍵字' 
-        @keyup.enter.native='submitSearch'
-      )
-        el-button(@click='submitSearch' slot='append' icon='el-icon-search')
-      hr
       transition(name='el-fade-in-linear')
         book-loading(v-show='isLoading')
 
-      .box-wrapper(v-for='(company, companyName) in searchSol' :key='companyName')
-        el-row.book(v-for='(book, bookId) in company', :key='bookId')
+      .box-wrapper(v-for='(book, key) in books' :key='key')
+        el-row.book
           el-col.company-name(:sm='24')
-            span(v-if='booksCompanyTable[companyName] !== undefined')
+            span(v-if='booksCompanyTable[book.company] !== undefined')
               img.company-icon(
-                :src='`/static/img/${companyName}.png`'
-                :alt='booksCompanyTable[companyName]'
+                :src='`/static/img/${book.company}.png`'
+                :alt='booksCompanyTable[book.company]'
               )
-              | {{ booksCompanyTable[companyName] }}
-            span(v-else) {{ companyName }}
+              | {{ booksCompanyTable[book.company] }}
+            span(v-else) {{ book.company }}
           el-col.image(:sm='6')
             img(:src='book.thumbnail' :alt='book.title')
           el-col.info(:sm='18')
@@ -61,12 +60,13 @@
           pubu: 'Pubu 電子書城'
         },
         searchSol: {},
+        books: [],
         isLoading: false,
       }
     },
     methods: {
       submitSearch() {
-        this.searchSol = {}
+        this.books = []
         this.isLoading = true
         this.axios.get('https://ebook.yuer.tw/search', {
           params: {
@@ -76,9 +76,24 @@
           if (res.data) {
             console.log(res.data)
             this.searchSol = res.data
-            // for(let index in res.data) {
-            //   this[index] = res.data[index]
-            // }
+            _.each(this.searchSol, (books, company) => {
+              try {
+                if (books.length !== 0) {
+                  _.each(books, (val, key) => {
+                    let book = _.merge(val, { company: company })
+                    console.log(book)
+                    if (key === 0) {
+                      this.books.unshift(book)
+                    } else {
+                      this.books.push(book)
+                    }
+                  })
+                }
+              } catch (error) {
+                console.log(error)
+              }
+            })
+            console.log(this.books)
             this.isLoading = false
           }
         }).catch((err) => {
@@ -101,6 +116,12 @@
   }
   main {
     padding: 1.2rem 1rem;
+  }
+
+  .el-input {
+    display: block;
+    width: auto;
+    padding: .5rem;
   }
   
   nav {

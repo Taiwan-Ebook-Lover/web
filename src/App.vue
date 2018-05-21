@@ -1,18 +1,15 @@
 <template>
-  <div id="app" v-cloak>
-    <!-- <EbookTable/> -->
+  <div id='app' v-cloak>
     <EbookSearch/>
   </div>
 </template>
 
 <script>
-import EbookTable from './components/EbookTable'
 import EbookSearch from './components/EbookSearch'
 
 export default {
   name: 'app',
   components: {
-    EbookTable,
     EbookSearch,
   }
 }
