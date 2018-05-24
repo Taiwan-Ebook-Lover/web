@@ -4,13 +4,14 @@
       nav
         h1 台灣電子書搜尋
         el-input(
-          placeholder='搜尋您想比價的電子書名關鍵字或ISBN'
-          prefix-icon='el-icon-search'
           v-model='searchKeyWord'
+          placeholder='搜尋您想比價的電子書名關鍵字或ISBN'
           @keyup.enter.native='submitSearch'
         )
+          el-button(@click='submitSearch' slot='append' icon='el-icon-search')
 
     el-main
+
       transition(name='el-fade-in-linear')
         book-loading(v-show='isLoading')
 
@@ -30,7 +31,7 @@
             .boot-title
               a(:href='book.link', target='_blank') {{ book.title }}
             p.hidden-xs-only {{ book.about.substr(0, 200) + '...' }}
-            
+
             span.price.hidden-xs-only {{ book.price }} {{ book.priceCurrency }}
           el-col.mobile-price.hidden-sm-and-up(:xs='24')
             span {{ book.price }} {{ book.priceCurrency }}
@@ -119,32 +120,35 @@
   }
 
   .el-input {
-    display: block;
-    width: auto;
     padding: .5rem;
   }
   
   nav {
     background-color: $main_color;
     color: #eee;
-    
+
     h1 {
       margin: 0;
       padding: 1rem;
       font-size: 1.4rem;
     }
   }
-  .bookshelf-wrapper {
-    margin-top: 180px;
-  }
-
   a {
     color: $main_color;
     text-decoration: none;
   }
-
   h2, p {
     color: lighten(black, 20%);
+  }
+
+  .bookshelf-wrapper {
+    margin-top: 180px;
+  }
+  .el-input__inner {
+    border-right-width: 0;
+  }
+  .el-input-group__append {
+    border-left-width: 0;
   }
 
   .book {
@@ -154,8 +158,18 @@
 
     background-color: #fff;
     margin-bottom: 15px;
+
     -webkit-box-shadow: 0 0 1px 0 rgba(0,0,0,.2), 0 1px 10px 0 rgba(0,0,0,.19);
-    box-shadow: 0 0 1px 0 rgba(0,0,0,.2), 0 1px 10px 0 rgba(0,0,0,.19);
+            box-shadow: 0 0 1px 0 rgba(0,0,0,.2), 0 1px 10px 0 rgba(0,0,0,.19);
+
+    transition: transform 300ms ease;
+
+    &:hover,
+    &:focus {
+      -webkit-box-shadow: 0 0 1px 0 rgba(0,0,0,.2), 0 1px 10px 0 rgba(0,0,0,.19);
+              box-shadow: 0 0 1px 0 rgba(0,0,0,.2), 0 1px 10px 0 rgba(0,0,0,.19);
+      transform: translateY(-2px);
+    }
 
     .company-name {
       margin-top: .5rem;
@@ -170,7 +184,7 @@
         padding-right: .3rem;
       }
     }
-    
+
     .image {
       img {
         width: 180px;
