@@ -3,26 +3,33 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import { Row, Col, Main, Header, Tag, Input, Button, Icon } from 'element-ui'
-import lodash from 'lodash'
+import _ from 'lodash'
+
+import Vuetify from 'vuetify'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'vuetify/dist/vuetify.min.css'
 import App from './App'
-import 'element-ui/lib/theme-chalk/display.css'
 
 Vue.config.productionTip = false
 
-Vue.use(Row)
-Vue.use(Col)
-Vue.use(Main)
-Vue.use(Header)
-Vue.use(Tag)
-Vue.use(Input)
-Vue.use(Button)
-Vue.use(Icon)
 Vue.use(VueAxios, axios)
+Vue.use(_)
+
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#455A64',
+    secondary: '#757575',
+    accent: '#448AFF',
+    error: '#FF5252',
+    warning: '#FFA726',
+    info: '#2196f3',
+    success: '#9CCC65',
+  },
+})
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   template: '<App/>',
-  components: { App}
+  components: { App },
 })
