@@ -1,0 +1,17 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:vue/essential"
+  ],
+  "rules": {
+    "semi": [
+      "error",
+      "never"
+    ]
+  }
+}
