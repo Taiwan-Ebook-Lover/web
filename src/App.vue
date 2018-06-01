@@ -1,17 +1,16 @@
-<template>
-  <div id='app' v-cloak>
-    <EbookSearch/>
-  </div>
+<template lang='pug'>
+  #app(v-cloak)
+    EbookSearch
 </template>
 
 <script>
-import EbookSearch from './components/EbookSearch'
+  import EbookSearch from './components/EbookSearch'
 
-export default {
-  name: 'app',
-  components: {
-    EbookSearch,
-  }
+  export default {
+    name: 'app',
+    components: {
+      EbookSearch,
+    }
 }
 </script>
 
