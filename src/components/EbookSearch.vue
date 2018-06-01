@@ -60,7 +60,7 @@
                     .company-name
                       span.hidden-xs-only(v-if='booksCompanyTable[book.company] !== undefined')
                         img.company-icon(
-                          :src='`/static/img/${book.company}.png`'
+                          :src='`./static/img/${book.company}.png`'
                           :alt='booksCompanyTable[book.company]'
                         )
                         | {{ booksCompanyTable[book.company] }}
@@ -70,7 +70,7 @@
                     v-layout(row)
                       span.hidden-sm-and-up(v-if='booksCompanyTable[book.company] !== undefined')
                         img.company-icon(
-                          :src='`/static/img/${book.company}.png`'
+                          :src='`./static/img/${book.company}.png`'
                           :alt='booksCompanyTable[book.company]'
                         )
                         | {{ booksCompanyTable[book.company] }}
