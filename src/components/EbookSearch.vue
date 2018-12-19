@@ -80,7 +80,7 @@
     },
     data () {
       return {
-        searchKeyWord: '台灣電子書搜尋',
+        searchKeyWord: '',
         searchFieldShow: false,
         booksCompanyTable: {
           booksCompany: '博客來',
