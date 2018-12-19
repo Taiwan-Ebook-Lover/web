@@ -26,11 +26,11 @@
         v-tab(key='價格高至低', @click='sortType(3)') 價格高至低
 
     v-content
-      v-container(style='min-height: 0;', grid-list-xl, fluid)
+      v-container(style='min-height: 0;', grid-list-xl)
         v-layout(row, wrap)
           book-loading(v-if='isLoading', style='margin-top: 180px')
           v-flex(xs12)
-            v-card.card-info(v-for='(book, key) in books' :key='key', color='white', style='margin: 10px 0px;')
+            v-card.card-info(v-for='(book, key) in books' :key='key', color='white', style='margin: 1.5rem 0;')
               v-container(grid-list-xl, fluid)
                 v-layout(row, wrap)
                   v-flex.img-block(xs12, sm4, text-xs-center, text-sm-left)
@@ -168,6 +168,13 @@
     color: lighten(black, 20%);
   }
 
+  .card {
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 3px 6px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    }
+  }
   .card-info {
     font-size: 1.2rem;
     text-align: justify;
