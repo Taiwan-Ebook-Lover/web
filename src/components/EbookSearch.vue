@@ -1,19 +1,6 @@
 <template lang='pug'>
   v-app#inspire
-    //- v-navigation-drawer(v-model='drawer', fixed, app)
-    //-   v-list(dense)
-    //-     v-list-tile
-    //-       v-list-tile-action
-    //-         v-icon home
-    //-       v-list-tile-content
-    //-         v-list-tile-title Home
-    //-     v-list-tile
-    //-       v-list-tile-action
-    //-         v-icon contact_mail
-    //-       v-list-tile-content
-    //-         v-list-tile-title Contact
     v-toolbar(color='primary', dark, app, tabs)
-      //- v-toolbar-side-icon(@click.stop='drawer = !drawer')
       v-text-field(
         v-model='searchKeyWord',
         v-if='searchFieldShow'
@@ -25,14 +12,12 @@
         hide-details=true
       )
       v-toolbar-title(v-else) {{ searchKeyWord }}
-      
+
       v-spacer(v-if='!searchFieldShow')
       v-btn(icon, v-if='!searchFieldShow', @click.stop='searchFieldShow = !searchFieldShow')
         v-icon search
       v-btn(icon, v-if='searchFieldShow', @click.stop='searchKeyWord = ""')
         v-icon clear
-      //- v-btn(icon)
-      //-   v-icon filter_list
 
       v-tabs(slot='extension', v-model='tab', color='primary', grow)
         v-tabs-slider(color='accent')
@@ -49,7 +34,7 @@
               v-container(grid-list-xl, fluid)
                 v-layout(row, wrap)
                   v-flex.img-block(xs12, sm4, text-xs-center, text-sm-left)
-                    //- v-card-media(:src='book.thumbnail' :alt='book.title', height='220px', contain)
+
                     img.book-img(
                       :src='book.thumbnail'
                       :alt='book.title'
@@ -66,7 +51,7 @@
                         | {{ booksCompanyTable[book.company] }}
                       span(v-else) {{ book.company }}
                     p.book-info.hidden-xs-only(:title='book.about')
-                      | {{ book.about.substr(0, 150) + '...' }}
+                      | {{ book.about ? book.about.substr(0, 150) + '...' : '' }}
                     v-layout(row)
                       span.hidden-sm-and-up(v-if='booksCompanyTable[book.company] !== undefined')
                         img.company-icon(
@@ -77,8 +62,6 @@
                       v-spacer
                       .price {{ book.price }} {{ book.priceCurrency }}
               v-card-actions
-                //- v-btn(flat, icon, color='black')
-                //-   v-icon favorite
                 v-spacer
                 v-btn.hidden-sm-and-up(icon, @click.native='book.show = !(book.show)')
                   v-icon {{ book.show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
@@ -223,7 +206,7 @@
     .company-icon {
       width: 30px;
       padding: .3rem;
-      
+
       border-radius: 5px;
       border: 1px solid #eee;
       padding: 1px;
